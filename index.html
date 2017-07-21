@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<head>
+  <title>Tappy Tap</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <!-- Load the Paper.js library -->
+  <script type="text/javascript" src="paper-full.js"></script>
+  <!-- Load howler.js -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.4/howler.min.js"></script>
+  <!-- Define inlined PaperScript associate it with myCanvas -->
+  <script type="text/paperscript" canvas="myCanvas">
+
+    // Set up color and sounds library
+    var keyData = {
+      a: {
+        color: 'F8B195',
+        sound: new Howl({
+          src: ['sounds/D/bubbles.mp3']
+        })
+      },
+      b: {
+        color: 'F67280',
+        sound: new Howl({
+          src: ['sounds/D/clay.mp3']
+        })
+      },
+      c: {
+        color: 'C06C84',
+        sound: new Howl({
+          src: ['sounds/D/confetti.mp3']
+        })
+      },
+      d: {
+        color: '6C5B7B',
+        sound: new Howl({
+          src: ['sounds/D/corona.mp3']
+        })
+      },
+      e: {
+        color: '355C7D',
+        sound: new Howl({
+          src: ['sounds/D/dotted-spiral.mp3']
+        })
+      },
+      f: {
+        color: '99B898',
+        sound: new Howl({
+          src: ['sounds/D/flash-1.mp3']
+        })
+      },
+      g: {
+        color: 'FECEAB',
+        sound: new Howl({
+          src: ['sounds/D/flash-2.mp3']
+        })
+      },
+      h: {
+        color: 'FF847C',
+        sound: new Howl({
+          src: ['sounds/D/flash-3.mp3']
+        })
+      },
+      i: {
+        color: 'E84A5F',
+        sound: new Howl({
+          src: ['sounds/D/glimmer.mp3']
+        })
+      },
+      j: {
+        color: '2A363B',
+        sound: new Howl({
+          src: ['sounds/D/moon.mp3']
+        })
+      },
+      k: {
+        color: 'A8E6CE',
+        sound: new Howl({
+          src: ['sounds/D/pinwheel.mp3']
+        })
+      },
+      l: {
+        color: 'DCEDC2',
+        sound: new Howl({
+          src: ['sounds/D/piston-1.mp3']
+        })
+      },
+      m: {
+        color: 'FFD3B5',
+        sound: new Howl({
+          src: ['sounds/D/piston-2.mp3']
+        })
+      },
+      n: {
+        color: 'FFAAA6',
+        sound: new Howl({
+          src: ['sounds/D/piston-3.mp3']
+        })
+      },
+      o: {
+        color: 'FF8C94',
+        sound: new Howl({
+          src: ['sounds/D/prism-1.mp3']
+        })
+      },
+      p: {
+        color: 'A8A7A7',
+        sound: new Howl({
+          src: ['sounds/D/prism-2.mp3']
+        })
+      },
+      q: {
+        color: 'CC527A',
+        sound: new Howl({
+          src: ['sounds/D/prism-3.mp3']
+        })
+      },
+      r: {
+        color: 'E8175D',
+        sound: new Howl({
+          src: ['sounds/D/splits.mp3']
+        })
+      },
+      s: {
+        color: '474747',
+        sound: new Howl({
+          src: ['sounds/D/squiggle.mp3']
+        })
+      },
+      t: {
+        color: '363636',
+        sound: new Howl({
+          src: ['sounds/D/strike.mp3']
+        })
+      },
+      u: {
+        color: 'A7226E',
+        sound: new Howl({
+          src: ['sounds/D/suspension.mp3']
+        })
+      },
+      v: {
+        color: 'EC2049',
+        sound: new Howl({
+          src: ['sounds/D/timer.mp3']
+        })
+      },
+      w: {
+        color: 'F26B38',
+        sound: new Howl({
+          src: ['sounds/D/ufo.mp3']
+        })
+      },
+      x: {
+        color: 'F7DB4F',
+        sound: new Howl({
+          src: ['sounds/D/veil.mp3']
+        })
+      },
+      y: {
+        color: '2F9599',
+        sound: new Howl({
+          src: ['sounds/D/wipe.mp3']
+        })
+      },
+      z: {
+        color: 'E1F5C4',
+        sound: new Howl({
+          src: ['sounds/D/zig-zag.mp3']
+        })
+      }
+    }
+
+    // Create data structure to store circles
+    var circles = [];
+
+    // Set up keyDown event
+    function onKeyDown(event) {
+      // Set bounds for each new circle, defining
+      // viewport size and choosing random point
+      var maxPoint = new Point(view.size.width, view.size.height);
+      var randNum = Point.random();
+      var randPoint = maxPoint * randNum;
+
+      // Draw circle
+      var circle = new Path.Circle(randPoint, 400);
+      circle.fillColor = "#" + keyData[event.key].color;
+
+      // Push circle to array
+      circles.push(circle);
+      console.log(keyData[event.key].color);
+
+      // Play sound
+      keyData[event.key].sound.play();
+
+      // Remove previous circles to optimize performance
+      // NB: Leaves visual legacy for fast beats. To remove,
+      // use conditional for (circles[i].area > 1) in onFrame loop
+      if (circles.length > 1) {
+        circles.shift();
+      }
+
+    }
+
+
+    // Manage animations (color and scale)
+    function onFrame(event) {
+      // Access and animate circles inside array
+      for (var i = 0; i < circles.length; i++) {
+        circles[i].fillColor.hue += 1;
+        circles[i].scale(.8);
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </script>
+</head>
+<body>
+  <canvas id="myCanvas" resize></canvas>
+</body>
+</html>

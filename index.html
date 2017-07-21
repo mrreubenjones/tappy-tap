@@ -174,28 +174,30 @@
 
     // Set up keyDown event
     function onKeyDown(event) {
-      // Set bounds for each new circle, defining
-      // viewport size and choosing random point
-      var maxPoint = new Point(view.size.width, view.size.height);
-      var randNum = Point.random();
-      var randPoint = maxPoint * randNum;
+      if (keyData[event.key]) {
+        // Set bounds for each new circle, defining
+        // viewport size and choosing random point
+        var maxPoint = new Point(view.size.width, view.size.height);
+        var randNum = Point.random();
+        var randPoint = maxPoint * randNum;
 
-      // Draw circle
-      var circle = new Path.Circle(randPoint, 400);
-      circle.fillColor = "#" + keyData[event.key].color;
+        // Draw circle
+        var circle = new Path.Circle(randPoint, 400);
+        circle.fillColor = "#" + keyData[event.key].color;
 
-      // Push circle to array
-      circles.push(circle);
-      console.log(keyData[event.key].color);
+        // Push circle to array
+        circles.push(circle);
+        console.log(keyData[event.key].color);
 
-      // Play sound
-      keyData[event.key].sound.play();
+        // Play sound
+        keyData[event.key].sound.play();
 
-      // Remove previous circles to optimize performance
-      // NB: Leaves visual legacy for fast beats. To remove,
-      // use conditional for (circles[i].area > 1) in onFrame loop
-      if (circles.length > 1) {
-        circles.shift();
+        // Remove previous circles to optimize performance
+        // NB: Leaves visual legacy for fast beats. To remove,
+        // use conditional for (circles[i].area > 1) in onFrame loop
+        if (circles.length > 1) {
+          circles.shift();
+        }
       }
 
     }
@@ -219,19 +221,14 @@
     text.content = 'Tap any key to get started...';
 
 
-
-
-
-
-
-
-
-
-
   </script>
 </head>
 <body>
   <canvas id="myCanvas" resize></canvas>
-
+  <footer>
+    <h1>Tappy Tap. v1</h1>
+    <p><a href="https://github.com/jonobr1/Neuronal-Synchrony">Sounds by jonobr1</a></p>
+    <p><a href="https://mrreubenjones.github.io/">Built by Reuben</a></p>
+  </footer>
 </body>
 </html>

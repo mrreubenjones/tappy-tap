@@ -210,7 +210,13 @@
       }
     }
 
+    // Create a point-text item at {x: 30, y: 30}:
+    var text = new PointText(new Point(50, 50));
+    text.fillColor = '#000';
+    text.fontSize = '1em'
 
+    // Set the content of the text item:
+    text.content = 'Tap any key to get started...';
 
 
 
@@ -226,5 +232,6 @@
 </head>
 <body>
   <canvas id="myCanvas" resize></canvas>
+
 </body>
 </html>

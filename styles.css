@@ -1,8 +1,32 @@
-html, body, canvas {
+html, body {
   height: 100%;
   margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 canvas {
   background-color: pink;
+  height: 70%;
+  width: 100%;
+}
+
+footer {
+  margin: 0;
+  padding: 50px;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+  opacity: 0.3;
+  transition: all 0.7s;
+}
+
+a:hover {
+  opacity: 0.9;
 }
